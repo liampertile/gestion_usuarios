@@ -22,7 +22,7 @@ class CourseController extends Controller
     {
         $query = Course::with(['teacher', 'subject', 'courseStudents.student']);
 
-        // Aplicar filtro de estado si se especifica
+        // filtro de activos e inactivos
         if ($request->has('estado')) {
             switch ($request->estado) {
                 case 'activos':

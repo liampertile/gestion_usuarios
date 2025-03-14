@@ -20,14 +20,6 @@ return new class extends Migration
             $table->foreignId('tema_id')->constrained('subjects');
             $table->timestamps();
         });
-
-        // Crear tabla pivote para la relación many-to-many entre courses y students
-        Schema::create('course_student', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('course_id')->constrained()->onDelete('cascade');
-            $table->foreignId('student_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
-        });
     }
 
     /**
@@ -35,7 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('course_student');
         Schema::dropIfExists('courses');
     }
 };
