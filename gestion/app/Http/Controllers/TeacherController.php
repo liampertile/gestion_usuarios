@@ -16,7 +16,12 @@ class TeacherController extends Controller
      */
     public function index(Request $request): View
     {
-        $teachers = Teacher::paginate();
+        if ($request->has('search')) {  
+            $teachers = Teacher::where('nombre', 'like', '%' . $request->search . '%')->paginate();
+        } else {
+            $teachers = Teacher::paginate();
+        }
+        
 
         return view('teacher.index', compact('teachers'))
             ->with('i', ($request->input('page', 1) - 1) * $teachers->perPage());
@@ -81,4 +86,6 @@ class TeacherController extends Controller
         return Redirect::route('teachers.index')
             ->with('success', 'Teacher deleted successfully');
     }
+
+    
 }

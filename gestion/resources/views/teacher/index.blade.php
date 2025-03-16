@@ -16,12 +16,20 @@
                                 {{ __('Teachers') }}
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('teachers.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                             <div class="float-right" style="display: flex; align-items: center;">
+                                <a href="{{ route('teachers.create') }}" class="btn btn-primary btn-sm" data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
-                              </div>
-                        </div>
+
+                                <form action="{{ route('teachers.index') }}" method="GET" class="ml-2">
+                                    <div class="input-group" style="width: 200px;">
+                                        <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="submit">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                             </div>
                     </div>
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success m-4">
